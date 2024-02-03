@@ -19,6 +19,6 @@ export default class CommandsHandler {
             console.log('Invalid input');
             return context;
         }
-        return await new (this.commandRegistry.get(parsedCommandData.commandName))().executeCommand(context, parsedCommandData.args);
+        return await new (this.commandRegistry.get(parsedCommandData.commandName))().executeCommand(context, parsedCommandData.args) || context;
     }
 }
