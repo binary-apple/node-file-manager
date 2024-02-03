@@ -6,7 +6,7 @@ export const commandParser = (commandString) => {
     }
     const commandStringParts = [...commandString.matchAll(regexp)].map((el) => el[0]);
     return {
-        command: commandStringParts[0],
+        commandName: commandStringParts[0],
         args: commandStringParts.slice(1)
     };
 }
