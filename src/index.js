@@ -5,6 +5,8 @@ import { UpCommand } from './commands/up.js';
 import { LsCommand } from './commands/ls.js';
 import { OsCommand } from './commands/os.js';
 import { HashCommand } from './commands/hash.js';
+import { CompressCommand } from './commands/compress.js';
+import { DecompressCommand } from './commands/decompress.js';
 
 const USERNAME_ARG_PREFIX = '--username=';
 
@@ -22,6 +24,8 @@ const startFileManager = async () => {
     commandsHandler.registerCommand('os', OsCommand);
     commandsHandler.registerCommand('os', OsCommand);
     commandsHandler.registerCommand('hash', HashCommand);
+    commandsHandler.registerCommand('compress', CompressCommand);
+    commandsHandler.registerCommand('decompress', DecompressCommand);
 
     console.log(`Welcome to the File Manager, ${enteredUsername}!`);
 
