@@ -1,23 +1,31 @@
 import { homedir } from 'os';
+import CommandsHandler from './commands_handler.js';
+import { CdCommand } from './commands/cd.js';
 
 const USERNAME_ARG_PREFIX = '--username=';
 
-const startFileManager = () => {
+const startFileManager = async () => {
     const args = process.argv.slice(2);
     const enteredUsername = args.find((el) => el.startsWith(USERNAME_ARG_PREFIX))?.slice(USERNAME_ARG_PREFIX.length) || 'Anonymous';
 
-    const workingDirectory = homedir();
+    let workingDirectory = homedir();
+
+    const commandsHandler = CommandsHandler.getCommandsHandler();
+    //register implemented commands
+    commandsHandler.registerCommand('cd', CdCommand);
 
     console.log(`Welcome to the File Manager, ${enteredUsername}!`);
 
     console.log(`You are currently in ${workingDirectory}`);
 
-    process.stdin.on('data', (data) => {
+    process.stdin.on('data', async (data) => {
         const input = data.toString().trim();
         if (input === '.exit') {
             process.exit();
         }
-        //TODO: input handling
+
+        workingDirectory = await commandsHandler.executeCommand(workingDirectory, input);
+
         console.log(`You are currently in ${workingDirectory}`);
 
     });
@@ -30,4 +38,4 @@ const startFileManager = () => {
     });
 }
 
-startFileManager();
+await startFileManager();

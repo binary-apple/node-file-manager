@@ -12,13 +12,13 @@ export default class CommandsHandler {
         this.commandRegistry.set(commandName, commandClass);
     }
 
-    static executeCommand(context, commandString) {
+    static async executeCommand(context, commandString) {
         const parsedCommandData = commandParser(commandString);
         if (!this.commandRegistry.has(parsedCommandData.commandName)) {
             // TODO: correct error handling
             console.log('Invalid input');
-            return;
+            return context;
         }
-        new (this.commandRegistry.get(parsedCommandData.commandName))().executeCommand(context, parsedCommandData.args);
+        return await new (this.commandRegistry.get(parsedCommandData.commandName))().executeCommand(context, parsedCommandData.args);
     }
 }

@@ -1,6 +1,6 @@
 export const commandParser = (commandString) => {
-    const regexp = /[a-z0-9_.-]+/gi;
-    const regexp2 = /[^\sa-z0-9_.-]+/gi;
+    const regexp = /[a-z0-9\\\-:_]+/gi;
+    const regexp2 = /[^\sa-z0-9\\\-:_]+/gi;
     if (regexp2.test(commandString)) {
         throw new Error('Invalid input');
     }
