@@ -1,6 +1,7 @@
 import { homedir } from 'os';
 import CommandsHandler from './commands_handler.js';
 import { CdCommand } from './commands/cd.js';
+import { UpCommand } from './commands/up.js';
 
 const USERNAME_ARG_PREFIX = '--username=';
 
@@ -13,6 +14,7 @@ const startFileManager = async () => {
     const commandsHandler = CommandsHandler.getCommandsHandler();
     //register implemented commands
     commandsHandler.registerCommand('cd', CdCommand);
+    commandsHandler.registerCommand('up', UpCommand);
 
     console.log(`Welcome to the File Manager, ${enteredUsername}!`);
 
