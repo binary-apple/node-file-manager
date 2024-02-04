@@ -11,6 +11,7 @@ import { RmCommand } from './commands/rm.js';
 import { CatCommand } from './commands/cat.js';
 import { AddCommand } from './commands/add.js';
 import { RnCommand } from './commands/rn.js';
+import { CpCommand } from './commands/cp.js';
 
 const USERNAME_ARG_PREFIX = '--username=';
 
@@ -28,6 +29,7 @@ const startFileManager = async () => {
     commandsHandler.registerCommand('cat', CatCommand);
     commandsHandler.registerCommand('add', AddCommand);
     commandsHandler.registerCommand('rn', RnCommand);
+    commandsHandler.registerCommand('cp', CpCommand);
     commandsHandler.registerCommand('rm', RmCommand);
     commandsHandler.registerCommand('os', OsCommand);
     commandsHandler.registerCommand('os', OsCommand);
