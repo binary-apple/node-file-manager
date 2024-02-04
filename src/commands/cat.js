@@ -10,7 +10,7 @@ class CatCommandResult extends AbstractCommandResult {
 
 export class CatCommand extends AbstractCommand {
     constructor() {
-        super('rm');
+        super('cat');
     }
 
     async executeCommand(context, args) {
