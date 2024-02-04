@@ -8,6 +8,7 @@ import { HashCommand } from './commands/hash.js';
 import { CompressCommand } from './commands/compress.js';
 import { DecompressCommand } from './commands/decompress.js';
 import { RmCommand } from './commands/rm.js';
+import { CatCommand } from './commands/cat.js';
 
 const USERNAME_ARG_PREFIX = '--username=';
 
@@ -22,8 +23,9 @@ const startFileManager = async () => {
     commandsHandler.registerCommand('cd', CdCommand);
     commandsHandler.registerCommand('up', UpCommand);
     commandsHandler.registerCommand('ls', LsCommand);
-    commandsHandler.registerCommand('rm', RmCommand);
+    commandsHandler.registerCommand('cat', CatCommand);
 
+    commandsHandler.registerCommand('rm', RmCommand);
     commandsHandler.registerCommand('os', OsCommand);
     commandsHandler.registerCommand('os', OsCommand);
     commandsHandler.registerCommand('hash', HashCommand);
