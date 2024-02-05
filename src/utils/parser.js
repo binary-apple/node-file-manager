@@ -1,10 +1,13 @@
+import { InvalidInputError } from "./custom_errors.js";
+
 export const commandParser = (commandString) => {
-    const regexp = /[a-z0-9\\\-:._]+/gi;
-    const regexp2 = /[^\sa-z0-9\\\-:._]+/gi;
-    if (regexp2.test(commandString)) {
-        throw new Error('Invalid input');
+    const regexp = /[^\s"]+|"([^"]*)"/gi;
+    const regexpFullInput = /^\s*([a-z]+(\s+([^\s"]+|"[^"]+"))*)\s*$/gi;
+    if (!regexpFullInput.test(commandString)) {
+        throw new InvalidInputError();
     }
-    const commandStringParts = [...commandString.matchAll(regexp)].map((el) => el[0]);
+
+    const commandStringParts = [...commandString.matchAll(regexp)].map((el) => el[1] || el[0]);
     return {
         commandName: commandStringParts[0],
         args: commandStringParts.slice(1)
