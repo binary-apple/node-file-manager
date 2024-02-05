@@ -1,12 +1,6 @@
 import os from 'os';
-import { AbstractCommand, AbstractCommandResult } from "./_abstract_command.js";
+import { AbstractCommand } from "./_abstract_command.js";
 import { InvalidInputError } from '../utils/custom_errors.js';
-
-class OsCommandResult extends AbstractCommandResult {
-    print() {
-        return;
-    }
-}
 
 export class OsCommand extends AbstractCommand {
     constructor() {

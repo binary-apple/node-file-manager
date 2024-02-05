@@ -1,14 +1,8 @@
 import path from 'path';
 import * as fs from 'node:fs/promises';
 import { readdir } from 'fs/promises';
-import { AbstractCommand, AbstractCommandResult } from "./_abstract_command.js";
+import { AbstractCommand } from "./_abstract_command.js";
 import { InvalidInputError, OperationFailedError } from '../utils/custom_errors.js';
-
-class LsCommandResult extends AbstractCommandResult {
-    print() {
-        return;
-    }
-}
 
 export class LsCommand extends AbstractCommand {
     constructor() {

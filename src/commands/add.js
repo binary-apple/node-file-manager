@@ -1,13 +1,7 @@
 import path from 'path';
 import { writeFile } from 'fs/promises';
-import { AbstractCommand, AbstractCommandResult } from "./_abstract_command.js";
+import { AbstractCommand } from "./_abstract_command.js";
 import { InvalidInputError, OperationFailedError } from '../utils/custom_errors.js';
-
-class AddCommandResult extends AbstractCommandResult {
-    print() {
-        return;
-    }
-}
 
 export class AddCommand extends AbstractCommand {
     constructor() {

@@ -2,14 +2,8 @@ import path from 'path';
 import { createReadStream, createWriteStream } from 'fs';
 import zlib from 'zlib';
 
-import { AbstractCommand, AbstractCommandResult } from "./_abstract_command.js";
+import { AbstractCommand } from "./_abstract_command.js";
 import { InvalidInputError, OperationFailedError } from '../utils/custom_errors.js';
-
-class DecompressCommandResult extends AbstractCommandResult {
-    print() {
-        return;
-    }
-}
 
 export class DecompressCommand extends AbstractCommand {
     constructor() {

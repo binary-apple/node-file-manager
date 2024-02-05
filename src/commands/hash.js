@@ -1,15 +1,9 @@
 import path from 'path';
 import { createHash } from 'crypto';
 import { createReadStream } from 'fs';
-import { AbstractCommand, AbstractCommandResult } from "./_abstract_command.js";
+import { AbstractCommand } from "./_abstract_command.js";
 import { pipeline } from 'node:stream/promises';
 import { InvalidInputError, OperationFailedError } from '../utils/custom_errors.js';
-
-class HashCommandResult extends AbstractCommandResult {
-    print() {
-        return;
-    }
-}
 
 export class HashCommand extends AbstractCommand {
     constructor() {
