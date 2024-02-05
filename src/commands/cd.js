@@ -1,4 +1,3 @@
-import path from 'path';
 import * as fs from 'node:fs/promises';
 import { AbstractCommand } from "./_abstract_command.js";
 import { InvalidInputError, OperationFailedError } from '../utils/custom_errors.js';
@@ -9,8 +8,6 @@ export class CdCommand extends AbstractCommand {
     }
 
     async executeCommand(context, args) {
-        console.log('cd implementation');
-
         let result = context;
 
         if (args.length !== 1) {

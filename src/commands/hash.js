@@ -1,8 +1,6 @@
-import path from 'path';
 import { createHash } from 'crypto';
 import { createReadStream } from 'fs';
 import { AbstractCommand } from "./_abstract_command.js";
-import { pipeline } from 'node:stream/promises';
 import { InvalidInputError, OperationFailedError } from '../utils/custom_errors.js';
 
 export class HashCommand extends AbstractCommand {
@@ -11,8 +9,6 @@ export class HashCommand extends AbstractCommand {
     }
 
     async executeCommand(context, args) {
-        console.log('hash implementation');
-
         if (args.length !== 1) {
             throw new InvalidInputError();
         }

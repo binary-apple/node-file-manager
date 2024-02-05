@@ -9,8 +9,6 @@ export class CpCommand extends AbstractCommand {
     }
 
     async executeCommand(context, args) {
-        console.log('cp implementation');
-
         if (args.length !== 2) {
             throw new InvalidInputError();
         }

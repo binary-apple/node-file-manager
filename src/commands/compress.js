@@ -1,4 +1,3 @@
-import path from 'path';
 import { createReadStream, createWriteStream } from 'fs';
 import zlib from 'zlib';
 
@@ -11,8 +10,6 @@ export class CompressCommand extends AbstractCommand {
     }
 
     async executeCommand(context, args) {
-        console.log('compress implementation');
-
         if (args.length !== 2) {
             throw new InvalidInputError();
         }

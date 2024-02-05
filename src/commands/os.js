@@ -29,8 +29,6 @@ export class OsCommand extends AbstractCommand {
     }
 
     async executeCommand(_context, args) {
-        console.log('os implementation');
-
         if (args.length !== 1 || !args[0].startsWith('--')) {
             throw new InvalidInputError();
         }

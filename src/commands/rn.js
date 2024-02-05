@@ -9,8 +9,6 @@ export class RnCommand extends AbstractCommand {
     }
 
     async executeCommand(context, args) {
-        console.log('rn implementation');
-
         if (args.length !== 2) {
             throw new InvalidInputError();
         }

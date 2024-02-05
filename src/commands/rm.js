@@ -1,4 +1,3 @@
-import path from 'path';
 import { rm } from 'fs';
 import { AbstractCommand } from "./_abstract_command.js";
 import { InvalidInputError, OperationFailedError } from '../utils/custom_errors.js';
@@ -9,8 +8,6 @@ export class RmCommand extends AbstractCommand {
     }
 
     async executeCommand(context, args) {
-        console.log('rm implementation');
-
         if (args.length !== 1) {
             throw new InvalidInputError();
         }

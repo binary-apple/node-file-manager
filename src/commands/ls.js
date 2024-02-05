@@ -1,5 +1,3 @@
-import path from 'path';
-import * as fs from 'node:fs/promises';
 import { readdir } from 'fs/promises';
 import { AbstractCommand } from "./_abstract_command.js";
 import { InvalidInputError, OperationFailedError } from '../utils/custom_errors.js';
@@ -10,8 +8,6 @@ export class LsCommand extends AbstractCommand {
     }
 
     async executeCommand(context, args) {
-        console.log('ls implementation');
-
         if (args.length > 0) {
             throw new InvalidInputError();
         }
