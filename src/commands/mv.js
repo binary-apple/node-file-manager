@@ -17,8 +17,8 @@ export class MvCommand extends AbstractCommand {
         }
 
         try {
-            const absoultePathToFile = path.isAbsolute(args[0]) ? args[0] : path.resolve(context, args[0]);
-            const newAbsolutePathToFile = path.resolve(path.isAbsolute(args[1]) ? args[1] : path.resolve(context, args[1]), path.basename(absoultePathToFile));
+            const absoultePathToFile = this.getAbsolutePath(context, args[0]);
+            const newAbsolutePathToFile = path.resolve(this.getAbsolutePath(context, args[1]), path.basename(absoultePathToFile));
 
             const inputStream = createReadStream(absoultePathToFile).on('end', ()=>{console.log(`readable ends`)}).on('error', ()=>{});
             const outputStream = createWriteStream(newAbsolutePathToFile);

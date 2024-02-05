@@ -1,3 +1,5 @@
+import path from 'path';
+
 export class AbstractCommand {
     constructor(name) {
         this.name = name;
@@ -8,5 +10,9 @@ export class AbstractCommand {
 
     executeCommand(context, commandString, args) {
         throw new Error('Abstract method must be overridden');
+    }
+
+    getAbsolutePath(context, pathToFile) {
+        return path.isAbsolute(pathToFile) ? pathToFile : path.resolve(context, pathToFile);
     }
 }

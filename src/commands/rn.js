@@ -16,7 +16,7 @@ export class RnCommand extends AbstractCommand {
         }
 
         try {
-            const absoultePathToFile = path.isAbsolute(args[0]) ? args[0] : path.resolve(context, args[0]);
+            const absoultePathToFile = this.getAbsolutePath(context, args[0]);
             const newAbsolutePathToFile = path.resolve(absoultePathToFile, '..', args[1]);
             await rename(absoultePathToFile, newAbsolutePathToFile);
         }

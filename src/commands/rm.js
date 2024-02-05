@@ -16,7 +16,7 @@ export class RmCommand extends AbstractCommand {
         }
 
         try {
-            const absoultePathToFile = path.isAbsolute(args[0]) ? args[0] : path.resolve(context, args[0]);
+            const absoultePathToFile = this.getAbsolutePath(context, args[0]);
 
             rm(absoultePathToFile, () => {});
         }

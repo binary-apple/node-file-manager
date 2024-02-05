@@ -17,7 +17,7 @@ export class CdCommand extends AbstractCommand {
             throw new InvalidInputError();
         }
 
-        const absoultePathToFile = path.isAbsolute(args[0]) ? args[0] : path.resolve(context, args[0]);
+        const absoultePathToFile = this.getAbsolutePath(context, args[0]);
 
         try {
             const stats = await fs.stat(absoultePathToFile);

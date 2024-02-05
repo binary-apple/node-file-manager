@@ -16,7 +16,7 @@ export class AddCommand extends AbstractCommand {
         }
 
         try {
-            const absoultePathToFile = path.resolve(context, args[0]);
+            const absoultePathToFile = this.getAbsolutePath(context, args[0]);
             await writeFile(absoultePathToFile, '', {flag: 'wx'});
         }
         catch (err) {
