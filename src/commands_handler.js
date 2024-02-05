@@ -8,8 +8,8 @@ export default class CommandsHandler {
         return this._instance = this._instance || this;
     };
 
-    static registerCommand(commandName, commandClass) {
-        this.commandRegistry.set(commandName, commandClass);
+    static registerCommand(commandName, commandInstance) {
+        this.commandRegistry.set(commandName, commandInstance);
     }
 
     static async executeCommand(context, commandString) {
@@ -19,6 +19,6 @@ export default class CommandsHandler {
             console.log('Invalid input');
             return context;
         }
-        return await new (this.commandRegistry.get(parsedCommandData.commandName))().executeCommand(context, parsedCommandData.args) || context;
+        return await this.commandRegistry.get(parsedCommandData.commandName).executeCommand(context, parsedCommandData.args) || context;
     }
 }

@@ -24,20 +24,19 @@ const startFileManager = async () => {
 
     const commandsHandler = CommandsHandler.getCommandsHandler();
     //register implemented commands
-    commandsHandler.registerCommand('cd', CdCommand);
-    commandsHandler.registerCommand('up', UpCommand);
-    commandsHandler.registerCommand('ls', LsCommand);
-    commandsHandler.registerCommand('cat', CatCommand);
-    commandsHandler.registerCommand('add', AddCommand);
-    commandsHandler.registerCommand('rn', RnCommand);
-    commandsHandler.registerCommand('cp', CpCommand);
-    commandsHandler.registerCommand('mv', MvCommand);
-    commandsHandler.registerCommand('rm', RmCommand);
-    commandsHandler.registerCommand('os', OsCommand);
-    commandsHandler.registerCommand('os', OsCommand);
-    commandsHandler.registerCommand('hash', HashCommand);
-    commandsHandler.registerCommand('compress', CompressCommand);
-    commandsHandler.registerCommand('decompress', DecompressCommand);
+    commandsHandler.registerCommand('cd', new CdCommand());
+    commandsHandler.registerCommand('up', new UpCommand());
+    commandsHandler.registerCommand('ls', new LsCommand());
+    commandsHandler.registerCommand('cat', new CatCommand());
+    commandsHandler.registerCommand('add', new AddCommand());
+    commandsHandler.registerCommand('rn', new RnCommand());
+    commandsHandler.registerCommand('cp', new CpCommand());
+    commandsHandler.registerCommand('mv', new MvCommand());
+    commandsHandler.registerCommand('rm', new RmCommand());
+    commandsHandler.registerCommand('os', new OsCommand());
+    commandsHandler.registerCommand('hash', new HashCommand());
+    commandsHandler.registerCommand('compress', new CompressCommand());
+    commandsHandler.registerCommand('decompress', new DecompressCommand());
 
     console.log(`Welcome to the File Manager, ${enteredUsername}!`);
 
