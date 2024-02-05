@@ -1,6 +1,7 @@
 import path from 'path';
 import * as fs from 'node:fs/promises';
 import { AbstractCommand, AbstractCommandResult } from "./_abstract_command.js";
+import { InvalidInputError, OperationFailedError } from '../utils/custom_errors.js';
 
 class CdCommandResult extends AbstractCommandResult {
     print() {
@@ -19,8 +20,7 @@ export class CdCommand extends AbstractCommand {
         let result = context;
 
         if (args.length !== 1) {
-            console.log('Invalid input');
-            return result;
+            throw new InvalidInputError();
         }
 
         const absoultePathToFile = path.isAbsolute(args[0]) ? args[0] : path.resolve(context, args[0]);
@@ -28,8 +28,8 @@ export class CdCommand extends AbstractCommand {
         try {
             const stats = await fs.stat(absoultePathToFile);
             result = stats.isDirectory() ? absoultePathToFile : context;
-        } catch {
-            console.log('Invalid input');
+        } catch (err) {
+            throw new OperationFailedError(err.message);
         }
         
         return result;

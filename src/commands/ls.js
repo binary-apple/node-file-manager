@@ -2,6 +2,7 @@ import path from 'path';
 import * as fs from 'node:fs/promises';
 import { readdir } from 'fs/promises';
 import { AbstractCommand, AbstractCommandResult } from "./_abstract_command.js";
+import { InvalidInputError, OperationFailedError } from '../utils/custom_errors.js';
 
 class LsCommandResult extends AbstractCommandResult {
     print() {
@@ -18,8 +19,7 @@ export class LsCommand extends AbstractCommand {
         console.log('ls implementation');
 
         if (args.length > 0) {
-            console.log('Invalid input');
-            return;
+            throw new InvalidInputError();
         }
 
         try {
@@ -38,7 +38,7 @@ export class LsCommand extends AbstractCommand {
             console.table(files);
             
         } catch (err) {
-            console.log('Operation failed');
+            throw new OperationFailedError(err.message);
         }
 
         return;

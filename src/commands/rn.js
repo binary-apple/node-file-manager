@@ -1,6 +1,7 @@
 import path from 'path';
 import { rename } from 'fs/promises';
 import { AbstractCommand, AbstractCommandResult } from "./_abstract_command.js";
+import { InvalidInputError, OperationFailedError } from '../utils/custom_errors.js';
 
 class RnCommandResult extends AbstractCommandResult {
     print() {
@@ -17,7 +18,7 @@ export class RnCommand extends AbstractCommand {
         console.log('rn implementation');
 
         if (args.length !== 2) {
-            console.log('Invalid input');
+            throw new InvalidInputError();
         }
 
         try {
@@ -25,8 +26,8 @@ export class RnCommand extends AbstractCommand {
             const newAbsolutePathToFile = path.resolve(absoultePathToFile, '..', args[1]);
             await rename(absoultePathToFile, newAbsolutePathToFile);
         }
-        catch {
-            console.log('Operation failed');
+        catch (err) {
+            throw new OperationFailedError(err.message);
         }
     }
 }

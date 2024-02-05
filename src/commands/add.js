@@ -1,6 +1,7 @@
 import path from 'path';
 import { writeFile } from 'fs/promises';
 import { AbstractCommand, AbstractCommandResult } from "./_abstract_command.js";
+import { InvalidInputError, OperationFailedError } from '../utils/custom_errors.js';
 
 class AddCommandResult extends AbstractCommandResult {
     print() {
@@ -17,15 +18,15 @@ export class AddCommand extends AbstractCommand {
         console.log('add implementation');
 
         if (args.length !== 1) {
-            console.log('Invalid input');
+            throw new InvalidInputError();
         }
 
         try {
             const absoultePathToFile = path.resolve(context, args[0]);
             await writeFile(absoultePathToFile, '', {flag: 'wx'});
         }
-        catch {
-            console.log('Operation failed');
+        catch (err) {
+            throw new OperationFailedError(err.message);
         }
     }
 }

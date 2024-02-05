@@ -1,6 +1,7 @@
 import path from 'path';
 import { createReadStream } from 'fs';
 import { AbstractCommand, AbstractCommandResult } from "./_abstract_command.js";
+import { InvalidInputError, OperationFailedError } from '../utils/custom_errors.js';
 
 class CatCommandResult extends AbstractCommandResult {
     print() {
@@ -17,7 +18,7 @@ export class CatCommand extends AbstractCommand {
         console.log('cat implementation');
 
         if (args.length !== 1) {
-            console.log('Invalid input');
+            throw new InvalidInputError();
         }
 
         try {
@@ -29,8 +30,8 @@ export class CatCommand extends AbstractCommand {
                 .pipe(process.stdout));
             console.log();
         }
-        catch {
-            console.log('Operation failed');
+        catch (err) {
+            throw new OperationFailedError(err.message);
         }
     }
 }

@@ -2,6 +2,7 @@ import path from 'path';
 import { createReadStream, createWriteStream, rm } from 'fs';
 import { pipeline } from 'stream/promises';
 import { AbstractCommand, AbstractCommandResult } from "./_abstract_command.js";
+import { InvalidInputError, OperationFailedError } from '../utils/custom_errors.js';
 
 class MvCommandResult extends AbstractCommandResult {
     print() {
@@ -18,7 +19,7 @@ export class MvCommand extends AbstractCommand {
         console.log('mv implementation');
 
         if (args.length !== 2) {
-            console.log('Invalid input');
+            throw new InvalidInputError();
         }
 
         try {
@@ -35,7 +36,7 @@ export class MvCommand extends AbstractCommand {
             rm(absoultePathToFile, (err) => {if (err) console.log(`rm error`)});
         }
         catch (err) {
-            console.log('Operation failed');
+            throw new OperationFailedError(err.message);
         }
     }
 }

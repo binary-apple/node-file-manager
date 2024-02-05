@@ -1,6 +1,7 @@
 import path from 'path';
 import { createReadStream, createWriteStream } from 'fs';
 import { AbstractCommand, AbstractCommandResult } from "./_abstract_command.js";
+import { InvalidInputError, OperationFailedError } from '../utils/custom_errors.js';
 
 class CpCommandResult extends AbstractCommandResult {
     print() {
@@ -17,7 +18,7 @@ export class CpCommand extends AbstractCommand {
         console.log('cp implementation');
 
         if (args.length !== 2) {
-            console.log('Invalid input');
+            throw new InvalidInputError();
         }
 
         try {
@@ -31,8 +32,8 @@ export class CpCommand extends AbstractCommand {
                 .on('error', reject)
                 .on('end', resolve));
         }
-        catch {
-            console.log('Operation failed');
+        catch (err) {
+            throw new OperationFailedError(err.message);
         }
     }
 }

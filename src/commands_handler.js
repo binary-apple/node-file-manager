@@ -1,4 +1,5 @@
-import { commandParser } from './utils/parser.js'
+import { commandParser } from './utils/parser.js';
+import { InvalidInputError } from './utils/custom_errors.js';
 
 export default class CommandsHandler {
     static _instance = null;
@@ -15,9 +16,7 @@ export default class CommandsHandler {
     static async executeCommand(context, commandString) {
         const parsedCommandData = commandParser(commandString);
         if (!this.commandRegistry.has(parsedCommandData.commandName)) {
-            // TODO: correct error handling
-            console.log('Invalid input');
-            return context;
+            throw new InvalidInputError();
         }
         return await this.commandRegistry.get(parsedCommandData.commandName).executeCommand(context, parsedCommandData.args) || context;
     }

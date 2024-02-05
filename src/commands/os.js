@@ -1,5 +1,6 @@
 import os from 'os';
 import { AbstractCommand, AbstractCommandResult } from "./_abstract_command.js";
+import { InvalidInputError } from '../utils/custom_errors.js';
 
 class OsCommandResult extends AbstractCommandResult {
     print() {
@@ -37,15 +38,13 @@ export class OsCommand extends AbstractCommand {
         console.log('os implementation');
 
         if (args.length !== 1 || !args[0].startsWith('--')) {
-            console.log('Invalid input');
-            return;
+            throw new InvalidInputError();
         }
 
         const option = args[0].slice(2);
-        if (this.commandOptions.has(option)) {
-            this.commandOptions.get(option)();
-            return;
+        if (!this.commandOptions.has(option)) {
+            throw new InvalidInputError();
         }
-        console.log('Invalid input');
+        this.commandOptions.get(option)();
     }
 }

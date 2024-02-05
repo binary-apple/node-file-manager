@@ -1,6 +1,7 @@
 import path from 'path';
 import { rm } from 'fs';
 import { AbstractCommand, AbstractCommandResult } from "./_abstract_command.js";
+import { InvalidInputError, OperationFailedError } from '../utils/custom_errors.js';
 
 class RmCommandResult extends AbstractCommandResult {
     print() {
@@ -17,7 +18,7 @@ export class RmCommand extends AbstractCommand {
         console.log('rm implementation');
 
         if (args.length !== 1) {
-            console.log('Invalid input');
+            throw new InvalidInputError();
         }
 
         try {
@@ -25,8 +26,8 @@ export class RmCommand extends AbstractCommand {
 
             rm(absoultePathToFile, () => {});
         }
-        catch {
-            console.log('Operation failed');
+        catch (err) {
+            throw new OperationFailedError(err.message);
         }
     }
 }

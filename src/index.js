@@ -48,7 +48,12 @@ const startFileManager = async () => {
             process.exit();
         }
 
-        workingDirectory = await commandsHandler.executeCommand(workingDirectory, input);
+        try {
+            workingDirectory = await commandsHandler.executeCommand(workingDirectory, input);
+        }
+        catch(err) {
+            console.log(err.message);
+        }
 
         console.log(`You are currently in ${workingDirectory}`);
 

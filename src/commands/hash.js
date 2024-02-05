@@ -3,6 +3,7 @@ import { createHash } from 'crypto';
 import { createReadStream } from 'fs';
 import { AbstractCommand, AbstractCommandResult } from "./_abstract_command.js";
 import { pipeline } from 'node:stream/promises';
+import { InvalidInputError, OperationFailedError } from '../utils/custom_errors.js';
 
 class HashCommandResult extends AbstractCommandResult {
     print() {
@@ -19,8 +20,7 @@ export class HashCommand extends AbstractCommand {
         console.log('hash implementation');
 
         if (args.length !== 1) {
-            console.log('Invalid input');
-            return;
+            throw new InvalidInputError();
         }
         
         try {
@@ -35,7 +35,7 @@ export class HashCommand extends AbstractCommand {
             console.log();
         }
         catch (err) {
-            console.log('Operation failed');
+            throw new OperationFailedError(err.message);
         }
     }
 }

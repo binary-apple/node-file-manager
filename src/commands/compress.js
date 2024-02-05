@@ -3,6 +3,7 @@ import { createReadStream, createWriteStream } from 'fs';
 import zlib from 'zlib';
 
 import { AbstractCommand, AbstractCommandResult } from "./_abstract_command.js";
+import { InvalidInputError, OperationFailedError } from '../utils/custom_errors.js';
 
 class CompressCommandResult extends AbstractCommandResult {
     print() {
@@ -19,7 +20,7 @@ export class CompressCommand extends AbstractCommand {
         console.log('compress implementation');
 
         if (args.length !== 2) {
-            console.log('Invalid input');
+            throw new InvalidInputError();
         }
 
         try {
@@ -34,7 +35,7 @@ export class CompressCommand extends AbstractCommand {
 
         }
         catch (err) {
-            console.log('Operation failed');
+            throw new OperationFailedError(err.message);
         }
 
     }

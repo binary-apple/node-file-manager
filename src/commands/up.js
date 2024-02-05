@@ -1,6 +1,7 @@
 import path from 'path';
 import * as fs from 'node:fs/promises';
 import { AbstractCommand, AbstractCommandResult } from "./_abstract_command.js";
+import { InvalidInputError } from '../utils/custom_errors.js';
 
 class UpCommandResult extends AbstractCommandResult {
     print() {
@@ -17,8 +18,7 @@ export class UpCommand extends AbstractCommand {
         console.log('up implementation');
 
         if (args.length > 0) {
-            console.log('Invalid input');
-            return result;
+            throw new InvalidInputError();
         }
 
         const result = path.resolve(context, '..');
